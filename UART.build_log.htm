@@ -1,0 +1,35 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\manis\Documents\AwesomeStuff\UART_4C123\UART.uvproj
+Project File Date:  05/02/2018
+
+<h2>Output:</h2>
+Rebuild target 'UART'
+assembling startup.s...
+compiling PLL.c...
+compiling UART.c...
+compiling UARTTestMain.c...
+ST7735.h(79): warning:  #1295-D: Deprecated declaration ST7735_InitR - give arg types
+  void ST7735_InitR();
+UARTTestMain.c(39): warning:  #177-D: variable "ch" was declared but never referenced
+    char ch;
+UARTTestMain.c(40): warning:  #550-D: variable "string" was set but never used
+    char string[20];  // global to assist in debugging
+UARTTestMain.c(41): warning:  #177-D: variable "n" was declared but never referenced
+    uint32_t n;
+UARTTestMain.c: 4 warnings, 0 errors
+compiling ST7735.c...
+ST7735.h(79): warning:  #1295-D: Deprecated declaration ST7735_InitR - give arg types
+  void ST7735_InitR();
+ST7735.c: 1 warning, 0 errors
+linking...
+Program Size: Code=4212 RO-data=1436 RW-data=24 ZI-data=1120  
+".\UART.axf" - 0 Error(s), 5 Warning(s).
+Load "C:\\Users\\manis\\Documents\\AwesomeStuff\\UART_4C123\\UART.axf" 
+Connecting: Mode=JTAG, Speed=1000000Hz
+Erase Done.
+Programming Done.
+Verify OK.
