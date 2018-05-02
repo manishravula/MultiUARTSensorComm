@@ -55,18 +55,6 @@ void EnableInterrupts(void);
 
 uint8_t allvals[4];
 
-char UART2_InChar(void);
-char UART3_InChar(void);
-//char UART4_InChar(void);
-//char UART7_InChar(void);
-//char UART6_InChar(void);
-
-void UART2_Handler(void){
-    UART2_ICR_R = UART_ICR_RXIC;        // acknowledge RX FIFO
-    // copy from hardware RX FIFO to software RX FIFO
-    allvals[0] = UART2_DR_R;
-}
-
 
 void UART3_Handler(void){
     UART3_ICR_R = UART_ICR_RXIC;        // acknowledge RX FIFO
@@ -81,31 +69,14 @@ void UART4_Handler(void){
     allvals[2] = UART4_DR_R;
 }
 
-void UART7_Handler(void){
-    UART7_ICR_R = UART_ICR_RXIC;        // acknowledge RX FIFO
-    // copy from hardware RX FIFO to software RX FIFO
-    allvals[3] = UART7_DR_R;
-}
 
 
 
 void UART_Init(void){
-  SYSCTL_RCGCUART_R |= 0x9C;             // activate UART2,3,4,7
-  SYSCTL_RCGCGPIO_R |= 0x1C;             // activate port C,D,E
+  SYSCTL_RCGCUART_R |= 0x18;             // activate UART3,4
+  SYSCTL_RCGCGPIO_R |= 0x04;             // activate port C
   while((SYSCTL_PRGPIO_R&0x01) == 0){};
 		
-  UART2_CTL_R &= ~UART_CTL_UARTEN;      // disable UART
-  UART2_IBRD_R = 520;                    // IBRD = int(80,000,000 / (16 * 9600)) = int(520.8333)
-  UART2_FBRD_R = 53;                     // FBRD = int(0.8333 * 64 + 0.5) = 53
-                                        // 8 bit word length (no parity bits, one stop bit, FIFOs)
-  UART2_LCRH_R = (UART_LCRH_WLEN_8|UART_LCRH_FEN);
-  UART2_IFLS_R &= ~0x3F;                // clear TX and RX interrupt FIFO level fields
-                                        // configure interrupt for TX FIFO <= 1/8 full
-                                        // configure interrupt for RX FIFO >= 1/8 full
-  UART2_IFLS_R += (UART_IFLS_TX1_8|UART_IFLS_RX1_8);
-                                        // enable TX and RX FIFO interrupts and RX time-out interrupt
-  UART2_IM_R |= (UART_IM_RXIM|UART_IM_TXIM|UART_IM_RTIM);
-	UART2_CTL_R |= 0x301;                 // enable UART
 		
 	UART3_CTL_R &= ~UART_CTL_UARTEN;      // disable UART
   UART3_IBRD_R = 520;                    // IBRD = int(50,000,000 / (16 * 115,200)) = int(27.1267)
@@ -133,52 +104,20 @@ void UART_Init(void){
                                         // enable TX and RX FIFO interrupts and RX time-out interrupt
   UART4_IM_R |= (UART_IM_RXIM|UART_IM_TXIM|UART_IM_RTIM);
 	UART4_CTL_R |= 0x301;                 // enable UART
-	
-	
-	
-	UART7_CTL_R &= ~UART_CTL_UARTEN;      // disable UART
-  UART7_IBRD_R = 520;                    // IBRD = int(50,000,000 / (16 * 115,200)) = int(27.1267)
-  UART7_FBRD_R = 53;                     // FBRD = int(0.1267 * 64 + 0.5) = 8
-                                        // 8 bit word length (no parity bits, one stop bit, FIFOs)
-  UART7_LCRH_R = (UART_LCRH_WLEN_8|UART_LCRH_FEN);
-  UART7_IFLS_R &= ~0x3F;                // clear TX and RX interrupt FIFO level fields
-                                        // configure interrupt for TX FIFO <= 1/8 full
-                                        // configure interrupt for RX FIFO >= 1/8 full
-  UART7_IFLS_R += (UART_IFLS_TX1_8|UART_IFLS_RX1_8);
-                                        // enable TX and RX FIFO interrupts and RX time-out interrupt
-  UART7_IM_R |= (UART_IM_RXIM|UART_IM_TXIM|UART_IM_RTIM);
-	UART7_CTL_R |= 0x301;                 // enable UART
-	
-	
-	
-	GPIO_PORTE_AFSEL_R |= 0x01; //0b00000001;         
-  GPIO_PORTE_DEN_R |= 0x01;   //0b00000001;         
-	
-  GPIO_PORTD_AFSEL_R |= 0x40; //0b01000000;          
-  GPIO_PORTD_DEN_R |= 0x40;   //0b01000000;         
+	     
 	
 	GPIO_PORTC_AFSEL_R |= 0x50; //0b01010000;           
   GPIO_PORTC_DEN_R |= 0x50;   //0b01010000;         
 	
                                                     // configure PA1-0 as UART
-	GPIO_PORTE_PCTL_R = (GPIO_PORTE_PCTL_R&0xFFFFFFF0)+0x00000001;
-  GPIO_PORTD_PCTL_R = (GPIO_PORTD_PCTL_R&0xF0FFFFFF)+0x01000000;
 	GPIO_PORTC_PCTL_R = (GPIO_PORTC_PCTL_R&0xF0F0FFFF)+0x01010000;
 	
-	GPIO_PORTE_AMSEL_R &= ~0x01;    //00000001    // disable analog functionality on PE0
-  GPIO_PORTD_AMSEL_R &= ~0x40;    //01000000    // disable analog functionality on PD6
 	GPIO_PORTC_AMSEL_R &= ~0x50; 		//01010000		// disable analog functionality on PC6,4
 	 
-	NVIC_EN1_R |= 0x98000002;    // UART7 63
+	NVIC_EN1_R |= 0x18000000;    // 
 	EnableInterrupts();
 }
 
-//------------UART_InChar------------
-// Wait for new serial port input
-// Input: none
-char UART2_InChar(void) {
-	return UART2_DR_R;
-}
 
 
 

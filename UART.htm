@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\UART.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\UART.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Wed May 02 15:19:35 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Wed May 02 15:54:13 2018
 <BR><P>
 <H3>Maximum Stack Usage =        104 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -140,12 +140,12 @@ Function Pointers
  <LI><a href="#[52]">Timer5B_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[12]">UART0_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[13]">UART1_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
- <LI><a href="#[2e]">UART2_Handler</a> from uart.o(i.UART2_Handler) referenced from startup.o(RESET)
+ <LI><a href="#[2e]">UART2_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[48]">UART3_Handler</a> from uart.o(i.UART3_Handler) referenced from startup.o(RESET)
  <LI><a href="#[49]">UART4_Handler</a> from uart.o(i.UART4_Handler) referenced from startup.o(RESET)
  <LI><a href="#[4a]">UART5_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[4b]">UART6_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
- <LI><a href="#[4c]">UART7_Handler</a> from uart.o(i.UART7_Handler) referenced from startup.o(RESET)
+ <LI><a href="#[4c]">UART7_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[39]">USB0_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[8]">UsageFault_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[1f]">WDT_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
@@ -515,10 +515,16 @@ Global Symbols
 <P><STRONG><a name="[13]"></a>UART1_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
+<P><STRONG><a name="[2e]"></a>UART2_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
+<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
+</UL>
 <P><STRONG><a name="[4a]"></a>UART5_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
 <P><STRONG><a name="[4b]"></a>UART6_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
+<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
+</UL>
+<P><STRONG><a name="[4c]"></a>UART7_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
 <P><STRONG><a name="[39]"></a>USB0_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
@@ -801,19 +807,13 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
 </UL>
 
-<P><STRONG><a name="[2e]"></a>UART2_Handler</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, uart.o(i.UART2_Handler))
-<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
-</UL>
 <P><STRONG><a name="[48]"></a>UART3_Handler</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, uart.o(i.UART3_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
 <P><STRONG><a name="[49]"></a>UART4_Handler</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, uart.o(i.UART4_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
-<P><STRONG><a name="[4c]"></a>UART7_Handler</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, uart.o(i.UART7_Handler))
-<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
-</UL>
-<P><STRONG><a name="[9c]"></a>UART_Init</STRONG> (Thumb, 508 bytes, Stack size 8 bytes, uart.o(i.UART_Init))
+<P><STRONG><a name="[9c]"></a>UART_Init</STRONG> (Thumb, 252 bytes, Stack size 8 bytes, uart.o(i.UART_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
 <LI>Call Chain = UART_Init
 </UL>
