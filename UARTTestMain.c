@@ -33,7 +33,7 @@
 // Output: none
 
 //debug code
-extern uint8_t allvals[4];
+extern uint8_t allvals[2];
 int main(void){
 	
   char ch;

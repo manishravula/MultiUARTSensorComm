@@ -53,20 +53,20 @@ void EnableInterrupts(void);
 //U7RX - PE0
 //U6RX - PD4  TODO NO LONGER USED
 
-uint8_t allvals[4];
+uint8_t allvals[2];
 
 
 void UART3_Handler(void){
     UART3_ICR_R = UART_ICR_RXIC;        // acknowledge RX FIFO
     // copy from hardware RX FIFO to software RX FIFO
-    allvals[1] = UART3_DR_R;
+    allvals[0] = UART3_DR_R;
 }
 
 
 void UART4_Handler(void){
     UART4_ICR_R = UART_ICR_RXIC;        // acknowledge RX FIFO
     // copy from hardware RX FIFO to software RX FIFO
-    allvals[2] = UART4_DR_R;
+    allvals[1] = UART4_DR_R;
 }
 
 

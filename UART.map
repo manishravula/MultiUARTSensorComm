@@ -395,7 +395,7 @@ Image Symbol Table
     Rcmd2green                               0x00000f16   Data          13  st7735.o(.constdata)
     Rcmd2red                                 0x00000f23   Data          13  st7735.o(.constdata)
     Rcmd3                                    0x00000f30   Data          43  st7735.o(.constdata)
-    .data                                    0x20000000   Section        4  uart.o(.data)
+    .data                                    0x20000000   Section        2  uart.o(.data)
     .data                                    0x20000004   Section       20  st7735.o(.data)
     _width                                   0x2000000e   Data           2  st7735.o(.data)
     _height                                  0x20000010   Data           2  st7735.o(.data)
@@ -643,7 +643,7 @@ Image Symbol Table
     main                                     0x000008f1   Thumb Code    44  uarttestmain.o(i.main)
     Region$$Table$$Base                      0x00000f5c   Number         0  anon$$obj.o(Region$$Table)
     Region$$Table$$Limit                     0x00000f7c   Number         0  anon$$obj.o(Region$$Table)
-    allvals                                  0x20000000   Data           4  uart.o(.data)
+    allvals                                  0x20000000   Data           2  uart.o(.data)
     StX                                      0x20000004   Data           4  st7735.o(.data)
     StY                                      0x20000008   Data           4  st7735.o(.data)
     StTextColor                              0x2000000c   Data           2  st7735.o(.data)
@@ -745,7 +745,8 @@ Memory Map of the image
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x00000004   Data   RW           37    .data               uart.o
+    0x20000000   0x00000002   Data   RW           37    .data               uart.o
+    0x20000002   0x00000002   PAD
     0x20000004   0x00000014   Data   RW          116    .data               st7735.o
 
 
@@ -768,13 +769,13 @@ Image component sizes
        124          6          0          0          0       4627   pll.o
       1058        130       1403         20          0       8050   st7735.o
        692        632          0          0       1024        900   startup.o
-       336         52          0          4          0       1746   uart.o
+       336         52          0          2          0       1746   uart.o
         44          0          0          0          0        995   uarttestmain.o
 
     ----------------------------------------------------------------------
       2258        820       1436         24       1024      16318   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         4          0          1          0          0          0   (incl. Padding)
+         4          0          1          2          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
