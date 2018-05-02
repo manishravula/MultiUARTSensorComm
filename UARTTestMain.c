@@ -48,11 +48,13 @@ int main(void){
 	}
 	string[19]= '\0';
 	
-while(1){
-	for (idx=0;idx<4;idx++){
-		ST7735_Message(0,idx,"Value: ",allvals[idx]);
-}
-}
+	while(1){
+		//for (idx=0;idx<4;idx++){
+			//ST7735_Message(0,idx,"Value: ",allvals[idx]);
+			//char x = UART2_InChar() &0x00FF;
+			//x = x;
+		//}
+	}
 }	
 
 
